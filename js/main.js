@@ -29,6 +29,10 @@ const woodTexture = new THREE.TextureLoader().load('assets/textures/wood_texture
 const rugPattern = new THREE.TextureLoader().load('assets/textures/rug_pattern.jpg');
 const outsideView = new THREE.TextureLoader().load('assets/textures/sunset_texture.jpg');
 const posterPicture = new THREE.TextureLoader().load('assets/textures/poster_texture.jpg');
+const posterPicture2 = new THREE.TextureLoader().load('assets/textures/poster_texture_2.jpg');
+const wallTexture = new THREE.TextureLoader().load('assets/textures/wall_texture.jpg');
+const leavesTexture = new THREE.TextureLoader().load('assets/textures/leaves_texture.jpg');
+const floorTexture = new THREE.TextureLoader().load('assets/textures/floor_texture.jpg');
 
 //Couch
 const couchMaterial = new THREE.MeshLambertMaterial({ map: fabricTexture });
@@ -48,12 +52,12 @@ scene.add(couchArmL);
 scene.add(couchBack);
 
 // Window
-const skyGeometry = new THREE.PlaneGeometry(18, 12);
+const skyGeometry = new THREE.PlaneGeometry(30, 12);
 const skyMaterial = new THREE.MeshBasicMaterial({ map: outsideView, side: THREE.DoubleSide });
 const sky = new THREE.Mesh(skyGeometry, skyMaterial);
 scene.add(sky);
 
-const windowFrameGeometry = new THREE.PlaneGeometry(18, 1.5);
+const windowFrameGeometry = new THREE.PlaneGeometry(30, 1.5);
 const windowFrameMaterial = new THREE.MeshLambertMaterial({ map: woodTexture, side: THREE.DoubleSide });
 const windowFrame1 = new THREE.Mesh(windowFrameGeometry, windowFrameMaterial);
 const windowFrame2 = new THREE.Mesh(windowFrameGeometry, windowFrameMaterial);
@@ -88,11 +92,15 @@ const rugMaterial = new THREE.MeshLambertMaterial({ map: rugPattern, side: THREE
 const rug = new THREE.Mesh(rugGeometry, rugMaterial);
 scene.add(rug);
 
-//Poster
+//Posters
 const posterGeometry = new THREE.PlaneGeometry(13, 19);
-const posterMaterial = new THREE.MeshPhongMaterial({ map: posterPicture, side: THREE.DoubleSide });
-const poster = new THREE.Mesh(posterGeometry, posterMaterial);
-scene.add(poster);
+const posterMaterial = new THREE.MeshLambertMaterial({ map: posterPicture, side: THREE.DoubleSide });
+const aestheticPoster = new THREE.Mesh(posterGeometry, posterMaterial);
+scene.add(aestheticPoster);
+
+const motivationMaterial = new THREE.MeshLambertMaterial({ map: posterPicture2, side: THREE.DoubleSide });
+const motivationalPoster = new THREE.Mesh(posterGeometry, motivationMaterial);
+scene.add(motivationalPoster);
 
 //Weird cube
 const weirdCubeGeometry = new THREE.BoxGeometry(2, 2, 2);
@@ -100,10 +108,40 @@ const weirdCubeMaterial = new THREE.MeshNormalMaterial();
 const weirdCube = new THREE.Mesh(weirdCubeGeometry, weirdCubeMaterial);
 scene.add(weirdCube);
 
+//Wall
+const wallGeometry = new THREE.PlaneGeometry(120, 45);
+const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture, side: THREE.DoubleSide });
+const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+scene.add(wall);
+
+//Floor
+const floorGeometry = new THREE.PlaneGeometry(150, 45);
+const floorMaterial = new THREE.MeshLambertMaterial({ map: floorTexture, side: THREE.DoubleSide });
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+scene.add(floor);
+
+
+//Vase
+const vaseGeometry = new THREE.CylinderGeometry(3.5, 2.5, 4, 6);
+const vaseMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+const vase1 = new THREE.Mesh(vaseGeometry, vaseMaterial);
+const vase2 = new THREE.Mesh(vaseGeometry, vaseMaterial);
+const vase3 = new THREE.Mesh(vaseGeometry, vaseMaterial);
+scene.add(vase1);
+scene.add(vase2);
+scene.add(vase3);
+
+const plantGeometry = new THREE.ConeGeometry(2, 8, 13);
+const plantMaterial = new THREE.MeshLambertMaterial({ color: 0x32a852, map: leavesTexture });
+const plant1 = new THREE.Mesh(plantGeometry, plantMaterial);
+const plant2 = new THREE.Mesh(plantGeometry, plantMaterial);
+const plant3 = new THREE.Mesh(plantGeometry, plantMaterial);
+scene.add(plant1);
+scene.add(plant2);
+scene.add(plant3);
 
 function animate() {
   requestAnimationFrame(animate);
-  // insert code here
 
   //Couch assembly
   couchSeat.position.x = -9;
@@ -144,26 +182,30 @@ function animate() {
   tableLegL2.position.z = 1.5;
 
   //Sky and Window
-  sky.position.x = -9;
+  sky.position.x = -11;
   sky.position.y = 12;
   sky.position.z = -7;
 
-  windowFrame1.position.x = -9;
+  windowFrame1.position.x = -11;
   windowFrame1.position.y = 18;
   windowFrame1.position.z = -7;
 
-  windowFrame2.position.x = -9;
+  windowFrame2.position.x = -11;
   windowFrame2.position.y = 12;
   windowFrame2.position.z = -7;
 
-  windowFrame3.position.x = -9;
+  windowFrame3.position.x = -11;
   windowFrame3.position.y = 6;
   windowFrame3.position.z = -7;
 
-  //Poster
-  poster.position.x = 18;
-  poster.position.y = 9;
-  poster.position.z = -7;
+  //Posters
+  aestheticPoster.position.x = 15;
+  aestheticPoster.position.y = 10;
+  aestheticPoster.position.z = -7;
+
+  motivationalPoster.position.x = 34;
+  motivationalPoster.position.y = 10;
+  motivationalPoster.position.z = -7;
 
   //Rug
   rug.position.x = -11;
@@ -180,7 +222,41 @@ function animate() {
   weirdCube.rotation.x += 0.01;
   weirdCube.rotation.y += 0.01;
 
-  //end
+  //Vase
+  vase1.position.x = 8;
+  vase1.position.y = -10;
+  vase1.position.z = -7;
+
+  vase2.position.x = 18;
+  vase2.position.y = -10;
+  vase2.position.z = -7;
+
+  vase3.position.x = 28;
+  vase3.position.y = -10;
+  vase3.position.z = -7;
+
+  plant1.position.x = 8;
+  plant1.position.y = -4;
+  plant1.position.z = -7;
+
+  plant2.position.x = 18;
+  plant2.position.y = -4;
+  plant2.position.z = -7;
+
+  plant3.position.x = 28;
+  plant3.position.y = -4;
+  plant3.position.z = -7;
+
+  //Wall
+  wall.position.y = 12;
+  wall.position.z = -10;
+
+  //Floor
+  floor.position.y = -12;
+  floor.position.z = -3;
+
+  floor.rotation.x = 14;
+
   renderer.render(scene, camera);
 }
 animate();
